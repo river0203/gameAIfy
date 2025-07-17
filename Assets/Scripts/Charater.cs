@@ -2,27 +2,28 @@ using UnityEngine;
 
 public class Charater : MonoBehaviour
 {
-    private int _maxHealth;
-    private int _currentHealth;
-    private const int _attackDamage = 1;
+    protected int _maxHealth;
+    protected int _currentHealth;
+    private int _attackDamage = 1;
 
-    private bool _isDead;
+    protected bool _isDead = false;
 
     protected Animator _animator;
     protected Rigidbody2D _body2D;
 
+    public int getAttackDamage()
+    {
+        return _attackDamage;
+    }
     protected virtual void Awake()
     {
         _animator = GetComponent<Animator>();
         _body2D = GetComponent<Rigidbody2D>();
     }
 
-    protected virtual void Die()
+    public virtual void Die()
     {
-        if(_isDead)
-        {
-            //gameOver;
-        }
+        _isDead = true;
     }
 
     public virtual void TakeDamage(int damage)
@@ -34,7 +35,6 @@ public class Charater : MonoBehaviour
 
         if (_currentHealth <= 0)
         {
-            _isDead = true;
             Die();
         }
     }
